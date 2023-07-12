@@ -9,3 +9,10 @@ void deleteNode(ListNode* node) {
         //now list will be 4-1-9
         delete temp;// just for sake delete temp
     }
+
+
+    // 4->5->1->9
+    //4->1->1->9
+    //4->1->9
+
+    // we have only access to 5 node not to 4
