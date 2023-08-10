@@ -25,3 +25,44 @@ ListNode* Solution::solve(ListNode* A) {
     // finally zeroD ke first dummy node ko skip krke baki sara list return krdiya
     return zeroD->next;
 }
+
+// the below code is to return the node from where the cycle begins
+ListNode *detectCycle(ListNode *head) {
+        if(!head || !head->next) return NULL;
+
+        ListNode* slow =head, *fast = head;
+        while(fast && fast->next ){
+            slow = slow->next;
+            fast = fast->next->next;
+            if(slow == fast) break;
+        }
+        if(slow==fast){
+            ListNode* start = fast, *begin = head;
+            while(start!=begin){
+                start = start->next;
+                begin = begin->next;
+            }
+            return start;
+
+        }else{
+            return NULL;
+        }
+    }
+
+    // the below code will also return the first node of cycle
+    // we use map, if the node is not present in the map then add it, else if the node is already present
+    // it means we came to that node again and their is a loop. simply return the first npde we come accross again
+    ListNode *detectCycle(ListNode *head) {
+        if(!head || !head->next) return NULL;
+
+        ListNode* slow =head;
+        map<ListNode*, bool> visited;
+        while(slow){
+            if(visited.find(slow) == visited.end()) visited[slow] = true;
+            else return slow;
+            
+            slow = slow->next;
+        }
+        return NULL;
+
+    }
